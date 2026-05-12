@@ -6,8 +6,9 @@
 
 การทำงานของไฟล์ `lstm.ipynb` สามารถแบ่งออกได้เป็นขั้นตอนหลักๆ ดังนี้:
 
-### 1. การดึงข้อมูล (Data Collection)
-ใช้ไลบรารี `youtube_transcript_api` เพื่อดาวน์โหลดคำบรรยาย (Transcript) จากวิดีโอ YouTube ของช่อง 9arm ตาม `VIDEO_IDS` ที่กำหนดไว้ แล้วนำข้อความทั้งหมดมารวมกันเพื่อใช้เป็นชุดข้อมูล
+### 1. การดึงข้อมูลและการตัดคำ (Data Collection & Tokenization)
+- ใช้ไลบรารี `youtube_transcript_api` เพื่อดาวน์โหลดคำบรรยาย (Transcript) จากวิดีโอ YouTube ของช่อง 9arm ตาม `VIDEO_IDS` ที่กำหนดไว้
+- หลังจากได้ข้อความทั้งหมดมารวมกันแล้ว ข้อมูลจะถูกนำไปผ่านกระบวนการทำความสะอาดและตัดคำภาษาไทย (Word Segmentation) ด้วยไลบรารี **PyThaiNLP** ในสคริปต์ `process_transcript.py` แล้วบันทึกผลลัพธ์เป็นชุดข้อมูลใน `transcript.csv` เพื่อนำมาใช้ฝึกสอนโมเดลต่อไป
 
 ### 2. การเตรียมข้อมูล (Data Preprocessing)
 - อ่านข้อมูลประโยคจากไฟล์ `transcript.csv`
@@ -34,3 +35,4 @@
 - TensorFlow / Keras (สร้าง Deep Learning)
 - Pandas, NumPy (จัดการข้อมูล)
 - youtube-transcript-api (ดึงข้อมูลคำบรรยายวิดีโอ)
+- PyThaiNLP (ตัดคำภาษาไทย)
